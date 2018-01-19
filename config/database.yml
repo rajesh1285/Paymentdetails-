@@ -9,12 +9,22 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
+
+default: &default1
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  host: localhost
+
+
 default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  #password:
   socket: /var/lib/mysql/mysql.sock
 
 development:
@@ -48,7 +58,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  <<: *default1
   database: Paymentdetails_production
   username: Paymentdetails
   password: <%= ENV['PAYMENTDETAILS_DATABASE_PASSWORD'] %>
